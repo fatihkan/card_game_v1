@@ -29,7 +29,8 @@ const Results = () => {
         useNativeDriver: true,
         toValue: Dimensions.get("window").width / 2 - 110 / 2,
       }),
-    ]).start(setCard((p) => ({ ...p, send: 0 })));
+    ]).start();
+    setCard((p) => ({ ...p, send: 0 }));
   };
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -85,15 +86,30 @@ const Results = () => {
               if (card.selected === 0) {
                 cardAnimation();
               } else {
-                setCard({ selected: 0 });
+                setCard((p) => ({ ...p, selected: 0 }));
               }
             }}
           >
+            {console.log(card)}
             <Animated.View
               style={{
                 transform: [
-                  { translateX: translateX.current },
-                  { translateY: translateY.current },
+                  {
+                    translateX:
+                      card.selected === 0
+                        ? translateX.current
+                        : card.send === 0
+                        ? translateX.current
+                        : 0,
+                  },
+                  {
+                    translateY:
+                      card.selected === 0
+                        ? translateY.current
+                        : card.send === 0
+                        ? translateX.current
+                        : 0,
+                  },
                 ],
               }}
             >
@@ -107,7 +123,7 @@ const Results = () => {
           <TouchableOpacity
             style={styles.gamerBottomTouch}
             onPress={() => {
-              setCard({ selected: 1 });
+              setCard((p) => ({ ...p, selected: 1 }));
             }}
           >
             <IconCardVAs style={{ bottom: card.selected === 1 ? 30 : 0 }} />
