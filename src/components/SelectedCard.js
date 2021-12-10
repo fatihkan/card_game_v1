@@ -1,27 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { IconCardVAs } from "../icons";
 
-const SelectedCard = ({ Dimensions }) => {
+const SelectedCard = (props) => {
+  const { Dimensions, select } = props;
   const { width, height } = Dimensions;
-  const SIZE = width - 75;
+  const [selected, setSelected] = useState(select);
   return (
     <View
       style={{
         ...StyleSheet.absoluteFillObject,
-        padding: 30,
-        paddingTop: height / 3 - SIZE / 2,
+        borderWidth: 1,
+        borderColor: "#dedede",
+        borderStyle: "dashed",
+        height: 146,
+        width: 100,
+        left: width / 2 - 100 / 2,
+        marginTop: height / 4.5 - 104 / 2,
         alignItems: "center",
       }}
     >
-      <View
-        style={{
-          height: 104,
-          width: 71,
-          borderWidth: 1,
-          borderColor: "#dedede",
-          borderStyle: "dashed",
-        }}
-      ></View>
+      {props.children}
+      {selected && <IconCardVAs />}
     </View>
   );
 };
