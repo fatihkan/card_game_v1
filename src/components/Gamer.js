@@ -14,7 +14,6 @@ const Gamer = (props) => {
         ? 150
         : 160
       : 170;
-  console.log(width);
   const locationBottom =
     Platform.OS === "android"
       ? width < 375
