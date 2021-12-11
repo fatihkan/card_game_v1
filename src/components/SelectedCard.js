@@ -13,6 +13,7 @@ const SelectedCard = (props) => {
         borderWidth: 1,
         borderColor: "#dedede",
         borderStyle: "dashed",
+        borderRadius: 1,
         height: 146,
         width: 100,
         left: width / 2 - 100 / 2,

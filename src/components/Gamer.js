@@ -4,8 +4,28 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 const Gamer = (props) => {
   const { gamer, Dimensions, location } = props;
   const { width, height } = Dimensions;
-  const locationRight = Platform.OS === "android" ? 170 : 160;
-  const locationBottom = Platform.OS === "android" ? 230 : 210;
+  const locationRight =
+    Platform.OS === "android"
+      ? width < 375
+        ? 145
+        : 170
+      : width < 400
+      ? width < 380
+        ? 150
+        : 160
+      : 170;
+  console.log(width);
+  const locationBottom =
+    Platform.OS === "android"
+      ? width < 375
+        ? 180
+        : 230
+      : width < 400
+      ? width < 380
+        ? 180
+        : 210
+      : 180;
+
   return (
     <>
       <View>{props.children}</View>

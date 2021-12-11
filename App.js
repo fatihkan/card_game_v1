@@ -50,6 +50,9 @@ function App() {
           },
           tabBarActiveTintColor: options.activeColor,
           tabBarInactiveTintColor: options.passiveColor,
+          tabBarLabelStyle: {
+            fontSize: 15,
+          },
         })}
       >
         <Stack.Screen

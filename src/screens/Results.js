@@ -23,7 +23,9 @@ const Results = () => {
     Animated.stagger(250, [
       Animated.spring(translateY.current, {
         useNativeDriver: true,
-        toValue: -Dimensions.get("window").height / 2 - 100 / 2,
+        toValue:
+          -Dimensions.get("window").height / 2 -
+          (Platform.OS === "android" ? 40 : width < 380 ? 50 : 90) / 2,
       }),
       Animated.spring(translateX.current, {
         useNativeDriver: true,
@@ -90,7 +92,6 @@ const Results = () => {
               }
             }}
           >
-            {console.log(card)}
             <Animated.View
               style={{
                 transform: [
@@ -177,7 +178,17 @@ const Results = () => {
 
 export default Results;
 const { width, height } = Dimensions.get("window");
-const gamerBottomRowHeight = Platform.OS === "ios" ? 10 : 0;
+const gamerBottomRowHeight =
+  Platform.OS === "android"
+    ? width < 375
+      ? -4
+      : 0
+    : width < 400
+    ? width < 380
+      ? -5
+      : 10
+    : 0;
+const gamerLeftRowBottom = Platform.OS === "android" && width < 375 ? 30 : 30;
 const styles = StyleSheet.create({
   gamerBottomTouch: {
     marginLeft: -70,
@@ -200,7 +211,7 @@ const styles = StyleSheet.create({
   gamerLeftRow: {
     flexDirection: "row",
     left: -width / 2 + 50,
-    marginVertical: 10,
-    bottom: 50,
+    marginVertical: 5,
+    bottom: gamerLeftRowBottom,
   },
 });
